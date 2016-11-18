@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------
-lir01.cpp	(IphoneImageReflection)	 catを動かす
+lir01.cpp	(IphoneImageReflection)	 makaronを動かす
 ---------------------------------------------------------------------------*/
 
 #include <windows.h>
@@ -8,7 +8,7 @@ lir01.cpp	(IphoneImageReflection)	 catを動かす
 #define	ID_MYTIMER	(32767)
 #define	ID_MYCHILD	(100)
 #define	CHD_WIDTH	(87)	//ピクセル
-#define	CHD_HEIGHT	(70)
+#define	CHD_HEIGHT	(110)
 
 // プロトタイプ宣言
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -23,9 +23,9 @@ static TCHAR szchClassName[] = _T("child");
 static TCHAR szTitle[] = _T("makaron");
 
 int img_start_x = 83;
-int img_start_y = 131;
+int img_start_y = 111;
 int img_end_x = 482;
-int img_end_y = 233;
+int img_end_y = 193;
 int min_y = 29;
 int center_screen = 283;
 
@@ -110,8 +110,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 	HBRUSH  hBrushWhite;
 	PAINTSTRUCT ps;
 
-	int go_x = width / 128 + 1;
-	int go_y = height / 64;
+	int go_x = width / 64;
+	int go_y = height / 128+1;
 
 	switch (message) {
 
@@ -182,32 +182,31 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 
 			//右向きに移動する時の処理	
 		case right:
-			if ((x >= img_start_x && y <= img_start_y) && x <= center_screen){
+			if ((x >= img_start_x && y <= img_start_y) && y >= min_y && x < center_screen){		//右上の中央スクリーンに向かって進む
 				x += go_x;
 				y -= go_y;
 			}
-			if (y >= min_y && x >= center_screen && y <= img_start_y){
+			if (y >= min_y && x >= center_screen && y <= img_start_y){		//中央スクリーンから右下に向かって進む
 				x += go_x;
 				y += go_y;
 			}
-			if (x >= img_end_x){
+			if (x >= img_end_x){		//右から左に変換
 				direction = left;
-				//count += 1;
 			}
 			break;
 
 
 			//左向きに移動する時の処理	
 		case left:
-			if (x <= img_end_x + 1 && x >= center_screen && y <= img_end_y){
+			if (x <= img_end_x + 1 && x >= center_screen && y <= img_end_y){	//左下の中央スクリーンに向かって進む
 				x -= go_x;
 				y += go_y;
 			}
-			if (x <= center_screen && y <= img_end_y && x >= img_start_x){
+			if (x <= center_screen && y <= img_end_y && x >= img_start_x){		///中央スクリーンから左上に向かって進む
 				x -= go_x;
 				y -= go_y;
 			}
-			if (x <= img_start_x){
+			if (x <= img_start_x){	//左から右に変換
 				direction = right;
 				count += 1;
 			}
@@ -244,7 +243,7 @@ LRESULT CALLBACK ChdProc1(HWND hChdWnd, UINT message, WPARAM wParam, LPARAM lPar
 
 			hBitmap1 = (HBITMAP)LoadImage(
 				hInst,
-				_T("makaron2.bmp"),
+				_T("maiku.bmp"),
 				IMAGE_BITMAP,
 				0,
 				0,
