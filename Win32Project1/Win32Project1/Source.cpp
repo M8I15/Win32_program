@@ -18,9 +18,9 @@ LRESULT CALLBACK ChdProc1(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 BOOL InitApp(HINSTANCE, WNDPROC, LPCTSTR);
 BOOL InitInstance(HINSTANCE, int, LPCTSTR);
 
-static TCHAR szClassName[] = _T("makaron");
+static TCHAR szClassName[] = _T("maiku");
 static TCHAR szchClassName[] = _T("child");
-static TCHAR szTitle[] = _T("makaron");
+static TCHAR szTitle[] = _T("maiku");
 
 int img_start_x = 83;
 int img_start_y = 111;
@@ -119,30 +119,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 
 		hDC = BeginPaint(hWnd, &ps);		// GDI関数による描画を開始する
 
-		//***********************
-		//**iPhoneを横向きにする
-		//***********************
+		
+		//iPhoneを横向きにする
 		hBrushBlack = CreateSolidBrush(RGB(0, 0, 0));
 		SelectObject(hDC, hBrushBlack);
 		RoundRect(hDC, 10, 10, 643, 322, 70, 80);    //iPhone7の外枠
-		Rectangle(hDC, 85, 321, 110, 325);               //マナーモードON/OFFキー
-		Rectangle(hDC, 135, 321, 185, 325);               //音量＋ボタン
-		Rectangle(hDC, 200, 321, 250, 325);               //音量－ボタン
-		Rectangle(hDC, 120, 7, 170, 20);               //電源ボタン
+		Rectangle(hDC, 120, 7, 170, 20);               //iPhone7の電源ボタン
 
 		hBrushWhite = CreateSolidBrush(RGB(255, 255, 255));
 		SelectObject(hDC, hBrushWhite);
-		Ellipse(hDC, 25, 162, 33, 170);              //中央上部の丸
-		Ellipse(hDC, 35, 221, 50, 236);              //中央上部下の丸
 		RoundRect(hDC, 39, 129, 46, 207, 80, 10);
-		Ellipse(hDC, 579, 139, 633, 193);            //ボタンの外丸
+		Ellipse(hDC, 579, 139, 633, 193);            //iPhone7の中央ボタン外枠
 
 		hBrushYellow = CreateSolidBrush(RGB(255, 255, 0));
 		SelectObject(hDC, hBrushYellow);
 		Rectangle(hDC, 83, 29, 571, 303);            //iPhone7の画面サイズ
 
 		SelectObject(hDC, hBrushBlack);
-		Ellipse(hDC, 584, 144, 628, 188);            //ボタンの内丸
+		Ellipse(hDC, 584, 144, 628, 188);            //iPhone7の中央ボタンの内枠
 
 		EndPaint(hWnd, &ps);				// GDI関数による描画を終了する
 
